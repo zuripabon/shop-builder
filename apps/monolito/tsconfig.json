@@ -1,10 +1,10 @@
 {
     "extends": "./tsconfig.base.json",
     "compilerOptions": {
-      "baseUrl": "./src",
+      "baseUrl": ".",
       "paths": {
         "@/*": [
-          "./*"
+          "src/*"
         ],
         "framework/*": [
           "./framework/*"
@@ -12,10 +12,7 @@
       },
       "outDir": "./dist/src",
       "plugins": [
-        // Transform paths in output .js files
         { "transform": "typescript-transform-paths" },
-  
-        // Transform paths in output .d.ts files (Include this line if you output declarations files)
         { "transform": "typescript-transform-paths", "afterDeclarations": true }
       ]
     },
