@@ -9,6 +9,7 @@ module.exports = {
     './rules/strict',
     './rules/style',
     './rules/imports',
+    './rules/jest/base',
     './rules/variables',
     './rules/prettier/base'
   ],
