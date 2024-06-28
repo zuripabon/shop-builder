@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test jest --config jest.config.js --passWithNoTests",
+    "test": "NODE_ENV=test jest --config jest.config.js --passWithNoTests --watch",
     "lint": "eslint \"**/*.ts*\"",
     "dev": "NODE_ENV=development tsx watch ./src/index.ts",
     "build": "pnpm run build:clean && pnpm run build:tsc && pnpm run build:di",
