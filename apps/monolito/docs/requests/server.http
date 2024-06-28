@@ -3,3 +3,4 @@ GET http://localhost:3000/health HTTP/1.1
 
 ###
 
+POST http://localhost:3000/product HTTP/1.1
