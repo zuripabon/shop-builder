@@ -47,8 +47,10 @@ export class ProductBuilder implements Builder<Product> {
   static withValidProduct(): ProductBuilder {
     return new ProductBuilder()
       .withId('d243zsvvqdZd0mTd') // @todo use nanoid
-      .withTitle('Galletas')
-      .withDescription('Galletas Ricas de la abuela con pepitas de chocolate')
+      .withTitle('Valid Product Title')
+      .withDescription(
+        'This is a valid product description. Use this field to set the product attributes like the size, color, .etc'
+      )
       .withPrice(100)
       .withImageUrl(['https://via.placeholder.com/150']);
   }
