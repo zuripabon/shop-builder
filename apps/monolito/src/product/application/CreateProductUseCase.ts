@@ -1,22 +1,16 @@
-import { Product } from '../domain/Product';
-import { ProductId } from '../domain/ProductId';
+import { Product, ProductPrimitives } from '../domain/Product';
 import { ProductRepository } from '../domain/ProductRepository';
+
+import { CreateProductQuery } from './CreateProductQuery';
 
 import { UseCase } from './UseCase';
 
-export class CreateProductUseCase implements UseCase {
+export class CreateProductUseCase implements UseCase<ProductPrimitives> {
   // @todo inject repository
   constructor(private productRepository: ProductRepository) {}
 
-  async execute(): Promise<void> {
-    const product = Product.create({
-      id: new ProductId('d243zsvvqdZd0mTd'),
-      title: 'Product title',
-      description: 'Product description',
-      price: 100,
-      imageUrl: ['image1', 'image2']
-    });
-
+  async execute(query: CreateProductQuery): Promise<void> {
+    const product = Product.create(query.data);
     this.productRepository.save(product);
   }
 }

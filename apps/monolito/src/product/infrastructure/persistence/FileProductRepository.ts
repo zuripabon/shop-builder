@@ -13,7 +13,7 @@ export class FileProductRepository implements ProductRepository {
     this.products.push(product);
     await writeFileSync(
       join(__dirname, FileProductRepository.FILENAME),
-      JSON.stringify(this.products)
+      JSON.stringify(this.products, null, 4)
     );
   }
 }

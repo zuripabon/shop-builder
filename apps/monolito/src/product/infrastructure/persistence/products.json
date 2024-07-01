@@ -1,1 +1,21 @@
-[{"id":{"value":"d243zsvvqdZd0mTd"},"title":"Product title","description":"Product description","price":100,"imageUrl":["image1","image2"]}]
+[
+    {
+        "id": {
+            "value": "d243zsvvqdZd0mTd"
+        },
+        "title": {
+            "value": "Galletas"
+        },
+        "description": {
+            "value": "Galletas Ricas de la abuela"
+        },
+        "price": {
+            "value": 100
+        },
+        "imageUrl": [
+            {
+                "value": "https://via.placeholder.com/150"
+            }
+        ]
+    }
+]
