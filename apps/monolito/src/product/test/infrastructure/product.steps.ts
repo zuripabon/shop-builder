@@ -1,11 +1,12 @@
-import request from 'supertest';
+import assert from 'assert';
 
+import request from 'supertest';
 import { Given, Then, BeforeAll, AfterAll } from '@cucumber/cucumber';
 
 import HttpApp from '@/HttpApp';
 
 const httpApp = new HttpApp();
-let httpRequest: request.Test;
+let httpResponse: request.Response;
 
 BeforeAll(async () => {
   await httpApp.up();
@@ -17,15 +18,13 @@ AfterAll(async () => {
 
 Given(
   'I send a POST request to {string} with body:',
-  (route: string, body: string) => {
-    httpRequest = request(httpApp.getHTTPServer()!)
+  async (route: string, body: string) => {
+    httpResponse = await request(httpApp.getHTTPServer()!)
       .post(route)
       .send(JSON.parse(body));
   }
 );
 
 Then('the response status code should be {int}', (status: number) => {
-  httpRequest.expect((response) => {
-    expect(response.status).toBe(status);
-  });
+  assert.equal(httpResponse.status, status);
 });

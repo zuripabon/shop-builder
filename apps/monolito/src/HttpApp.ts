@@ -32,15 +32,14 @@ export default class HttpApp {
           req.body.imageUrl
         )
       );
-      res.status(200);
+      res.status(200).end();
     });
   }
 
   async up() {
     const port = process.env.PORT || 3000;
-    this.httpServer = this.app.listen(port, () => {
-      console.log(`Server is running on port ${port}`);
-    });
+    this.httpServer = await this.app.listen(port);
+    console.log(`Server is running on port ${port}`);
     process.on('SIGINT', () => this.down());
   }
 
