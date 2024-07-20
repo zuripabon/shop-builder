@@ -1,4 +1,7 @@
+/* eslint-disable no-use-before-define */
 import { Server } from 'http';
+
+import { AddressInfo } from 'net';
 
 import express, { Request, Response } from 'express';
 
@@ -9,8 +12,9 @@ import { CreateProductQuery } from './product/application/CreateProductQuery';
 export class HttpApp {
   private app: express.Express;
   private httpServer?: Server;
+  private static instance: HttpApp;
 
-  constructor() {
+  private constructor() {
     this.app = express();
 
     this.app.use(express.json());
@@ -35,9 +39,14 @@ export class HttpApp {
   async up() {
     const port = process.env.PORT || 3000;
 
-    this.httpServer = await this.app.listen(port);
+    console.log(process.env.NODE_ENV);
+    this.httpServer = await this.app.listen(
+      process.env.NODE_ENV === 'test' ? 0 : port
+    );
 
-    console.log(`Server is running on port ${port}`);
+    const address = this.httpServer.address() as AddressInfo;
+
+    console.log(`Server is running on port ${address.port}`);
 
     process.on('SIGINT', () => {
       console.log('Server is stopping');
@@ -54,5 +63,12 @@ export class HttpApp {
 
   getHttpServer() {
     return this.httpServer;
+  }
+
+  static create() {
+    if (!this.instance) {
+      this.instance = new HttpApp();
+    }
+    return this.instance;
   }
 }

@@ -4,7 +4,7 @@ import { HttpApp } from '@/HttpApp';
 import { EnvironmentArranger } from './EnvironmentArranger';
 
 export class TestEnvironmentHttpArranger implements EnvironmentArranger {
-  httpApp: HttpApp = new HttpApp();
+  private readonly httpApp: HttpApp = HttpApp.create();
 
   async before() {
     await this.httpApp.up();

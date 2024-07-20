@@ -1,6 +1,6 @@
 import { HttpApp } from '@/HttpApp';
 
 (async () => {
-  const httpApp = new HttpApp();
+  const httpApp = HttpApp.create();
   await httpApp.up();
 })();

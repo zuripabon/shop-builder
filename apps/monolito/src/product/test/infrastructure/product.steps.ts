@@ -3,6 +3,8 @@ import assert from 'assert';
 import { AfterAll, BeforeAll, Given, Then } from '@cucumber/cucumber';
 import request from 'supertest';
 
+import { HttpApp } from '@/HttpApp';
+
 import { TestEnvironmentArranger } from './TestEnvironmentArranger';
 
 const testEnvironmentArranger = new TestEnvironmentArranger();
@@ -19,9 +21,9 @@ AfterAll(async () => {
 Given(
   'I send a POST request to {string} with payload:',
   async (route: string, payload: string) => {
-    httpResponse = await request(
-      testEnvironmentArranger.httpArranger.httpApp.getHttpServer()!
-    )
+    const httpApp = HttpApp.create();
+
+    httpResponse = await request(httpApp.getHttpServer()!)
       .post(route)
       .send(JSON.parse(payload));
   }
